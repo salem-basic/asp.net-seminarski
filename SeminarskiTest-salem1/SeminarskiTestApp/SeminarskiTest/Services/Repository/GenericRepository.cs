@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SeminarskiTest.Data;
+using SeminarskiTest.Helper;
 
 namespace SeminarskiTest.Services.Repository
 {
@@ -20,10 +21,23 @@ namespace SeminarskiTest.Services.Repository
 
             entity = AddInclude(entity);
 
+            entity = AddQuery(entity, search);
+
             return entity.ToList();
 
         }
 
+        public PagedList<T> GetPaged(TSearch search)
+        {
+            var set = _context.Set<T>();
+            var entity = set.AsQueryable();
+
+            entity = AddInclude(entity);
+
+            entity = AddQuery(entity, search);
+
+            return GetPaged(entity, search);
+        }
 
         public void Add(TModel x)
         {
@@ -35,8 +49,6 @@ namespace SeminarskiTest.Services.Repository
             _context.SaveChanges();
         }
 
-
-
         public void Update(int id, TModel z)
         {
             var set = _context.Set<T>();
@@ -47,7 +59,6 @@ namespace SeminarskiTest.Services.Repository
 
             _context.SaveChanges();
         }
-
 
         public void Delete(int id)
         {
@@ -80,6 +91,11 @@ namespace SeminarskiTest.Services.Repository
         virtual public IQueryable<T> AddQuery(IQueryable<T> query, TSearch search)
         {
             return query;
+        }
+
+        virtual public PagedList<T> GetPaged(IQueryable<T> entity, TSearch search)
+        {
+            return entity as PagedList<T>;
         }
     }
 }

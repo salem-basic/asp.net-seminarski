@@ -8,6 +8,6 @@ namespace SeminarskiTest.Services.Interfaces
 {
     public interface IProizvodService : IGenericRepository<Proizvod, ProizvodVModel, ProizvodiSearchObject>
     {
-        PagedList<Proizvod> GetPaged(ProizvodiSearchObject search);
+        //PagedList<Proizvod> GetPaged(ProizvodiSearchObject search);
     }
 }

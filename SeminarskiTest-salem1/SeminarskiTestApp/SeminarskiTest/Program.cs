@@ -37,6 +37,9 @@ builder.Services.AddTransient<IKategorijaService, KategorijaService>();
 builder.Services.AddTransient<INaruzdbaService, NarudzbaService>();
 builder.Services.AddTransient<IProizvodService, ProizvodService>();
 builder.Services.AddTransient<ISpolService, SpolService>();
+builder.Services.AddTransient<IValutaService, ValutaService>();
+builder.Services.AddTransient<IBrendService, BrendService>();
+builder.Services.AddTransient<IDobavljacService, DobavljacService>();
 builder.Services.AddScoped<IAuthManager, AuthManager>();
 
 builder.Services.ConfigureSwaggerDoc();

@@ -32,14 +32,21 @@ namespace SeminarskiTest.Services
         {
             if (!string.IsNullOrWhiteSpace(search.Naziv))
             {
-                query = query.Where(x => x.NazivProizvoda.StartsWith(search.Naziv));
+                query = query.Where(x => x.NazivProizvoda.ToLower().StartsWith(search.Naziv.ToLower()));
             }
 
             if (search.DobavljacSearch > 0)
             {
                 query = query.Where(x => x.Dobavljac.Id == search.DobavljacSearch);
             }
-
+            if (search.BrendSearch > 0)
+            {
+                query = query.Where(x => x.Brend.Id == search.BrendSearch);
+            }
+            if (search.KategorijaSearch > 0)
+            {
+                query = query.Where(x => x.Kategorija.Id == search.KategorijaSearch);
+            }
             if (search.ComboBoxSearch == "AbecedaUnazad")
             {
                 query = query.OrderByDescending(x => x.NazivProizvoda);
@@ -63,14 +70,8 @@ namespace SeminarskiTest.Services
             return query;
         }
 
-        public PagedList<Proizvod> GetPaged(ProizvodiSearchObject search)
+        public override PagedList<Proizvod> GetPaged(IQueryable<Proizvod> entity, ProizvodiSearchObject search)
         {
-            var entity = _db.Proizvod.AsQueryable();
-
-            entity = AddInclude(entity);
-
-            entity = AddQuery(entity, search);
-
             return PagedList<Proizvod>.ToPagedList(entity, search.PageNumber, search.PageSize);
         }
     }

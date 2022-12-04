@@ -16,6 +16,9 @@ namespace SeminarskiTest.Mapper
             CreateMap<NarudzbaVModel, Narudzba>();
             CreateMap<ProizvodVModel, Proizvod>();
             CreateMap<SpolVModel, Spol>();
+            CreateMap<DobavljacVModel, Dobavljac>();
+            CreateMap<ValutaVModel, Valuta>();
+            CreateMap<BrendVModel, Brend>();
         }
     }
 }

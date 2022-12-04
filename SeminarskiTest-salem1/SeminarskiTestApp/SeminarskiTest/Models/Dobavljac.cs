@@ -14,6 +14,6 @@ namespace SeminarskiTest.Models
         public int? DrzavaId { get; set; }
         public Drzava Drzava { get; set; }
 
-        public ICollection<Proizvod> Proizvodi { get; set; }
+        //public ICollection<Proizvod> Proizvodi { get; set; }
     }
 }

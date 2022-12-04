@@ -71,7 +71,7 @@ namespace SeminarskiTest.Data
                     SpolId = 2
                 });
 
-            builder.Entity<Proizvod>().HasOne(x => x.Dobavljac).WithMany(y => y.Proizvodi).OnDelete(DeleteBehavior.Restrict);
+           // builder.Entity<Proizvod>().HasOne(x => x.Dobavljac).WithMany(y => y.Proizvod).OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(builder);
         }
     }

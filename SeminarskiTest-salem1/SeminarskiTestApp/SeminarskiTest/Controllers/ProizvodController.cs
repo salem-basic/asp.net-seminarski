@@ -21,7 +21,7 @@ namespace SeminarskiTest.Controllers
 
         [HttpGet]
 
-        public IEnumerable<Proizvod> Get(ProizvodiSearchObject search, int test)
+        public IEnumerable<Proizvod> Get([FromQuery] ProizvodiSearchObject search, int test)
         {
             return this.repository.Get(search);
         }
@@ -49,14 +49,14 @@ namespace SeminarskiTest.Controllers
 
         [HttpPost]
 
-        public void Add(ProizvodVModel x)
+        public void Add([FromBody] ProizvodVModel x)
         {
             this.repository.Add(x);
         }
 
         [HttpPatch("{id}")]
 
-        public void Update(int id, ProizvodVModel x)
+        public void Update(int id, [FromBody] ProizvodVModel x)
         {
             this.repository.Update(id, x);
         }

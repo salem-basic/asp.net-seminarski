@@ -1,4 +1,6 @@
-﻿namespace SeminarskiTest.Services.Repository
+﻿using SeminarskiTest.Helper;
+
+namespace SeminarskiTest.Services.Repository
 {
     public interface IGenericRepository<T, TModel, TSearch>
     {
@@ -7,5 +9,6 @@
         void Update(int id, TModel z);
         void Delete(int id);
         void Delete(string id);
+        PagedList<T> GetPaged(TSearch search);
     }
 }
