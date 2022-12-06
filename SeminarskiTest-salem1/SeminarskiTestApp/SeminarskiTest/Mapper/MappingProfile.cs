@@ -19,6 +19,7 @@ namespace SeminarskiTest.Mapper
             CreateMap<DobavljacVModel, Dobavljac>();
             CreateMap<ValutaVModel, Valuta>();
             CreateMap<BrendVModel, Brend>();
+            CreateMap<ProdavnicaVModel, Prodavnica>();
         }
     }
 }

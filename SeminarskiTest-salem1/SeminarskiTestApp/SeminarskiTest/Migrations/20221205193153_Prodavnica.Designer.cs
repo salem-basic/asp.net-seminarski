@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeminarskiTest.Data;
 
@@ -11,9 +12,10 @@ using SeminarskiTest.Data;
 namespace SeminarskiTest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205193153_Prodavnica")]
+    partial class Prodavnica
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,22 +53,22 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a111bc33-4f67-4100-871b-aa4c1220c5bd",
-                            ConcurrencyStamp = "c641b98f-fcaf-4b33-a88a-188fe06175eb",
+                            Id = "60e0abd8-9da2-4b92-8a7c-43d1214cd5d1",
+                            ConcurrencyStamp = "13cac03b-91f7-47f2-95f9-6fd3a12d261e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1d91310c-0138-4a8c-a7db-dff0deb45aca",
-                            ConcurrencyStamp = "42078159-bd52-4925-b254-4bb6a70daaac",
+                            Id = "282f2711-0585-4eba-aaea-8badb8efbced",
+                            ConcurrencyStamp = "33f6eb15-2e2a-4c45-b9bc-2f74ef6ad06b",
                             Name = "Zaposlenik",
                             NormalizedName = "ZAPOSLENIK"
                         },
                         new
                         {
-                            Id = "7aa5f6d8-77c3-444e-9716-c611722b4ca5",
-                            ConcurrencyStamp = "5bc6a5d8-f9dd-4711-b608-58074be3bbe1",
+                            Id = "7f61d86e-2265-436e-b35e-bd23892a9c80",
+                            ConcurrencyStamp = "fd92672a-fdcb-462f-b98d-f245bfde2d67",
                             Name = "Korisnik",
                             NormalizedName = "KORISNIK"
                         });
@@ -420,12 +422,12 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "21603a6a-854c-4515-8cf6-27aedd182f0e",
+                            Id = "5195dc40-d26f-4dc5-9fcf-7a5f2d592f20",
                             AccessFailedCount = 0,
                             Adresa = "Mahala",
                             BrojTelefona = "123",
-                            ConcurrencyStamp = "5c182022-1586-4aed-92e2-471726678545",
-                            DatumRodjenja = new DateTime(2022, 12, 5, 21, 18, 16, 914, DateTimeKind.Local).AddTicks(369),
+                            ConcurrencyStamp = "ad82001e-e360-4cc1-beee-c600691315d3",
+                            DatumRodjenja = new DateTime(2022, 12, 5, 20, 31, 53, 36, DateTimeKind.Local).AddTicks(5876),
                             DrzavaId = 2,
                             Email = "salem@seminarski.com",
                             EmailConfirmed = false,
@@ -435,7 +437,7 @@ namespace SeminarskiTest.Migrations
                             Lozinka = "Lozinka1@",
                             PhoneNumberConfirmed = false,
                             Prezime = "Taslidza",
-                            SecurityStamp = "1f95573d-ab81-43db-9d5b-6952089c56e5",
+                            SecurityStamp = "10e5c903-1ffd-42a2-b7a4-789fb341c85f",
                             SpolId = 2,
                             TwoFactorEnabled = false
                         });
@@ -517,30 +519,6 @@ namespace SeminarskiTest.Migrations
                     b.HasIndex("ProizvodId");
 
                     b.ToTable("Narudzba");
-                });
-
-            modelBuilder.Entity("SeminarskiTest.Models.Prodavnica", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Naziv")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Telefon")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Prodavnica");
                 });
 
             modelBuilder.Entity("SeminarskiTest.Models.Proizvod", b =>

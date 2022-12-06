@@ -25,6 +25,7 @@ namespace SeminarskiTest.Data
         public DbSet<SpecialOffer> SpecialOffer { get; set; }
         public DbSet<EvidencijaZaposlenika> EvidencijaZaposlenika { get; set; }
         public DbSet<Spol> Spol { get; set; }
+        public DbSet<Prodavnica> Prodavnica { get; set; }
 
 
 
