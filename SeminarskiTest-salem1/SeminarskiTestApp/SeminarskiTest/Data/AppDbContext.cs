@@ -14,18 +14,15 @@ namespace SeminarskiTest.Data
         public DbSet<Kartica> Kartica { get; set; }
         public DbSet<Kategorija> Kategorija { get; set; }
         public DbSet<Korisnik> Korisnik { get; set; }
-        public DbSet<Korpa> Korpa { get; set; }
-        public DbSet<KorpaProizvod> KorpaProizvod { get; set; }
         public DbSet<Narudzba> Narudzba { get; set; }
         public DbSet<Proizvod> Proizvod { get; set; }
         public DbSet<Slika> Slika { get; set; }
-        public DbSet<Transakcija> Transakcija { get; set; }
         public DbSet<Brend> Brend { get; set; }
         public DbSet<Dobavljac> Dobavljac { get; set; }
-        public DbSet<SpecialOffer> SpecialOffer { get; set; }
         public DbSet<EvidencijaZaposlenika> EvidencijaZaposlenika { get; set; }
         public DbSet<Spol> Spol { get; set; }
         public DbSet<Prodavnica> Prodavnica { get; set; }
+        public DbSet<Dostavljac> Dostavljac { get; set; }
 
 
 

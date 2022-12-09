@@ -41,10 +41,13 @@ builder.Services.AddTransient<IValutaService, ValutaService>();
 builder.Services.AddTransient<IBrendService, BrendService>();
 builder.Services.AddTransient<IDobavljacService, DobavljacService>();
 builder.Services.AddTransient<IProdavnicaService, ProdavnicaService>();
+builder.Services.AddTransient<IDostavljacService, DostavljacService>();
 builder.Services.AddScoped<IAuthManager, AuthManager>();
+builder.Services.AddSingleton<TimeManager>();
 
 builder.Services.ConfigureSwaggerDoc();
-
+builder.Services.AddSignalR();
+builder.Services.AddRazorPages();
 
 builder.Services.AddIdentityCore<IdentityUser>(
     options => {
@@ -80,38 +83,46 @@ app.UseAuthentication();
 
 app.UseCors(myAllowDifferentOrigins);
 
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllers();
+//    endpoints.MapRazorPages();
+//    endpoints.MapHub<ChartHub>("/Chart");
+//});
 app.MapControllers();
+app.MapRazorPages();
+app.MapHub<ChartHub>("/Chart");
 
 app.Run();
 
 
-public class ApplicationUser : IdentityUser<int>
-{
-    public DateTime CreatedAt { get; set; }
-    public DateTime? ModifiedAt { get; set; }
-    public bool IsDeleted { get; set; }
-    public bool Active { get; set; }
-}
+//public class ApplicationUser : IdentityUser<int>
+//{
+//    public DateTime CreatedAt { get; set; }
+//    public DateTime? ModifiedAt { get; set; }
+//    public bool IsDeleted { get; set; }
+//    public bool Active { get; set; }
+//}
 
-public class ApplicationRole : IdentityRole<int>
-{
-    public int? RoleLevel { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public DateTime? ModifiedAt { get; set; }
-    public bool IsDeleted { get; set; }
+//public class ApplicationRole : IdentityRole<int>
+//{
+//    public int? RoleLevel { get; set; }
+//    public DateTime CreatedAt { get; set; } = DateTime.Now;
+//    public DateTime? ModifiedAt { get; set; }
+//    public bool IsDeleted { get; set; }
 
-    public ICollection<ApplicationUserRole> Roles { get; set; }
+//    public ICollection<ApplicationUserRole> Roles { get; set; }
 
 
-}
+//}
 
-public class ApplicationUserRole : IdentityUserRole<int>
-{
-    public int Id { get; set; }
+//public class ApplicationUserRole : IdentityUserRole<int>
+//{
+//    public int Id { get; set; }
     
-    public ApplicationUser User { get; set; }
-    public ApplicationRole Role { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime? ModifiedAt { get; set; }
-    public bool IsDeleted { get; set; }
-}
+//    public ApplicationUser User { get; set; }
+//    public ApplicationRole Role { get; set; }
+//    public DateTime CreatedAt { get; set; }
+//    public DateTime? ModifiedAt { get; set; }
+//    public bool IsDeleted { get; set; }
+//}

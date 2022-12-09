@@ -131,9 +131,17 @@ namespace SeminarskiTest.Controllers
         }
 
         [HttpPost]
-        public void Add(KorisnikVModel x)
+        public async void Add(KorisnikVModel x)
         {
             this.repository.Add(x);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44324/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage msg = await client.GetAsync("api/chart");
+            }
         }
 
 
@@ -150,9 +158,17 @@ namespace SeminarskiTest.Controllers
         //}
 
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public async void Delete(string id)
         {
             this.repository.Delete(id);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44324/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage msg = await client.GetAsync("api/chart");
+            }
         }
     } 
 }

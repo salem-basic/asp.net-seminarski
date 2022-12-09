@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeminarskiTest.Data;
 
@@ -11,9 +12,10 @@ using SeminarskiTest.Data;
 namespace SeminarskiTest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221207121958_DostavljacPopravka")]
+    partial class DostavljacPopravka
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,22 +53,22 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1b64472e-655a-4e3c-a151-74966266b079",
-                            ConcurrencyStamp = "fcb12a9f-4a89-42f7-8a5e-06a7afbede2c",
+                            Id = "eba8f533-2b53-4f79-9ff8-f06ea2516524",
+                            ConcurrencyStamp = "3e03209d-c05e-4a7e-b2f0-385c5ff904d7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "67508616-e330-4f2e-abd6-dd202afc0c0b",
-                            ConcurrencyStamp = "456611b5-69e2-4e81-b67a-9025414a1890",
+                            Id = "5d5f1e6f-f8f2-4d74-884e-ce33d76670ed",
+                            ConcurrencyStamp = "1efefbfb-353a-46a8-93a8-90b58c01cb6c",
                             Name = "Zaposlenik",
                             NormalizedName = "ZAPOSLENIK"
                         },
                         new
                         {
-                            Id = "cacd732a-e5c4-43d0-8fad-19a7c320c47d",
-                            ConcurrencyStamp = "67000544-3f85-4bcf-8a56-1fb34c881258",
+                            Id = "a8b11fc6-36e9-4476-8ed7-f2134315dd84",
+                            ConcurrencyStamp = "32da4278-8aab-4dbf-aee8-121efc2db1a0",
                             Name = "Korisnik",
                             NormalizedName = "KORISNIK"
                         });
@@ -447,12 +449,12 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e60c1c6d-9290-4d5e-91c5-c06a0caf9dc1",
+                            Id = "d0f17de8-c621-4ea9-a49d-145dd2513fd2",
                             AccessFailedCount = 0,
                             Adresa = "Mahala",
                             BrojTelefona = "123",
-                            ConcurrencyStamp = "2a7de6ae-2c23-417c-82b4-bb6c75ddfdab",
-                            DatumRodjenja = new DateTime(2022, 12, 7, 18, 21, 21, 456, DateTimeKind.Local).AddTicks(1944),
+                            ConcurrencyStamp = "39c668ce-d882-4f38-8c04-da0dd213a5bf",
+                            DatumRodjenja = new DateTime(2022, 12, 7, 13, 19, 57, 707, DateTimeKind.Local).AddTicks(5095),
                             DrzavaId = 2,
                             Email = "salem@seminarski.com",
                             EmailConfirmed = false,
@@ -462,7 +464,7 @@ namespace SeminarskiTest.Migrations
                             Lozinka = "Lozinka1@",
                             PhoneNumberConfirmed = false,
                             Prezime = "Taslidza",
-                            SecurityStamp = "82b9942a-6dd9-426f-89e7-f9894a842009",
+                            SecurityStamp = "f841f7e3-9192-44f5-b5dd-42f7cad1c71e",
                             SpolId = 2,
                             TwoFactorEnabled = false
                         });
@@ -524,10 +526,6 @@ namespace SeminarskiTest.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Naziv")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Slika")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
