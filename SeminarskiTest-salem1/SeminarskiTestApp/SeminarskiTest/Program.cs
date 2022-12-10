@@ -58,11 +58,12 @@ builder.Services.AddIdentityCore<IdentityUser>(
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: myAllowDifferentOrigins,
+    options.AddPolicy("CorsPolicy",
         builder => {
             builder.WithOrigins("http://localhost:4200")
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowAnyMethod()
+            .AllowCredentials();
         });
 });
 
@@ -81,7 +82,7 @@ app.UseAuthorization();
 
 app.UseAuthentication();
 
-app.UseCors(myAllowDifferentOrigins);
+app.UseCors("CorsPolicy");
 
 //app.UseEndpoints(endpoints =>
 //{
