@@ -58,7 +58,7 @@ builder.Services.AddIdentityCore<IdentityUser>(
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy",
+    options.AddPolicy(name : myAllowDifferentOrigins,
         builder => {
             builder.WithOrigins("http://localhost:4200")
             .AllowAnyHeader()
@@ -82,14 +82,9 @@ app.UseAuthorization();
 
 app.UseAuthentication();
 
-app.UseCors("CorsPolicy");
+app.UseCors(myAllowDifferentOrigins);
 
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapControllers();
-//    endpoints.MapRazorPages();
-//    endpoints.MapHub<ChartHub>("/Chart");
-//});
+
 app.MapControllers();
 app.MapRazorPages();
 app.MapHub<ChartHub>("/Chart");
