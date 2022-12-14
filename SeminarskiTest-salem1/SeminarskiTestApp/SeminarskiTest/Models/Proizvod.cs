@@ -27,7 +27,6 @@ namespace SeminarskiTest.Models
         [ForeignKey(nameof(Brend))]
         public int? BrendId { get; set; }
         public Brend Brend { get; set; }
-        public string KorisnikId { get; set; }
-        public virtual Korisnik Korisnik { get; set; }
+
     }
 }

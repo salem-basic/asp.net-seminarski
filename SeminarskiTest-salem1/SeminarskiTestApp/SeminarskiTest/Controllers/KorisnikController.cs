@@ -94,6 +94,8 @@ namespace SeminarskiTest.Controllers
                     return Unauthorized();
                 }
 
+                
+
                 return Accepted(new TokenRequest { Token = await _authManager.CreateToken(), IsAuthSuccessful = true /*RefreshToken = await _authManager.CreateRefreshToken()*/ });
                 }
             catch (Exception ex)

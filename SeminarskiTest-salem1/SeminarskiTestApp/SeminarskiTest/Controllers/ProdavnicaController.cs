@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SeminarskiTest.Helper;
 using SeminarskiTest.Models;
@@ -46,6 +47,7 @@ namespace SeminarskiTest.Controllers
         }
 
         [HttpPost]
+        
         public void Add([FromBody] ProdavnicaVModel x)
         {
             this.repository.Add(x);

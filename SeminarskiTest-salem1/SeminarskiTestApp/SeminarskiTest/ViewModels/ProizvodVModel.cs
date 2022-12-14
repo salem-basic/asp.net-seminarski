@@ -8,7 +8,6 @@
         public string Cijena { get; set; }
         public string Slika { get; set; }
         public int? KategorijaId { get; set; }
-        public string KorisnikId { get; set; }
         public int? DobavljacId { get; set; }
         public int? BrendId { get; set; }
 

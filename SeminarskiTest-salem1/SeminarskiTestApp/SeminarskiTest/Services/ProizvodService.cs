@@ -23,7 +23,7 @@ namespace SeminarskiTest.Services
 
         public override IQueryable<Proizvod> AddInclude(IQueryable<Proizvod> query)
         {
-            query = query.Include(v => v.Valuta).Include(k => k.Kategorija).Include(kk => kk.Korisnik).Include(d => d.Dobavljac).Include(b => b.Brend);
+            query = query.Include(v => v.Valuta).Include(k => k.Kategorija).Include(d => d.Dobavljac).Include(b => b.Brend);
 
             return query;
         }

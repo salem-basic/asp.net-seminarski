@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SeminarskiTest.Helper;
 using SeminarskiTest.Models;
 using SeminarskiTest.SearchObject;
 using SeminarskiTest.Services.Interfaces;
 using SeminarskiTest.ViewModels;
+using System.Data;
 
 namespace SeminarskiTest.Controllers
 {
@@ -20,7 +22,6 @@ namespace SeminarskiTest.Controllers
         }
 
         [HttpGet]
-
         public IEnumerable<Proizvod> Get([FromQuery] ProizvodiSearchObject search, int test)
         {
             return this.repository.Get(search);
