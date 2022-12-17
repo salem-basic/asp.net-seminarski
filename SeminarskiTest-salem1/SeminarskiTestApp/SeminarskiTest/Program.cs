@@ -42,8 +42,10 @@ builder.Services.AddTransient<IBrendService, BrendService>();
 builder.Services.AddTransient<IDobavljacService, DobavljacService>();
 builder.Services.AddTransient<IProdavnicaService, ProdavnicaService>();
 builder.Services.AddTransient<IDostavljacService, DostavljacService>();
+builder.Services.AddTransient<ISlikaService, SlikaService>();
 builder.Services.AddScoped<IAuthManager, AuthManager>();
 builder.Services.AddSingleton<TimeManager>();
+builder.Services.AddSingleton<TimerManager2>();
 
 builder.Services.ConfigureSwaggerDoc();
 builder.Services.AddSignalR();
@@ -88,6 +90,7 @@ app.UseCors(myAllowDifferentOrigins);
 app.MapControllers();
 app.MapRazorPages();
 app.MapHub<ChartHub>("/Chart");
+app.MapHub<ChartHub2>("/Chart2");
 
 app.Run();
 

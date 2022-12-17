@@ -7,9 +7,6 @@ namespace SeminarskiTest.Models
     {
         [Key]
         public int Id { get; set; }
-        public string SlikaProizvoda { get; set; }
-        [ForeignKey(nameof(Proizvod))]
-        public int? ProizvodId { get; set; }
-        public Proizvod Proizvod { get; set; }
+        public string SlikaSlika { get; set; }
     }
 }

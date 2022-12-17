@@ -23,7 +23,7 @@ namespace SeminarskiTest.Data
         public DbSet<Spol> Spol { get; set; }
         public DbSet<Prodavnica> Prodavnica { get; set; }
         public DbSet<Dostavljac> Dostavljac { get; set; }
-
+      
 
 
 

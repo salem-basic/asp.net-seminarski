@@ -77,6 +77,9 @@ namespace SeminarskiTest.Controllers
             }
         }
 
+
+
+
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginKorisnikVModel loginKorisnik)

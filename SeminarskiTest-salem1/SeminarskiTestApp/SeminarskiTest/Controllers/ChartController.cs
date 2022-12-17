@@ -12,24 +12,24 @@ namespace SeminarskiTest.Controllers
     {
         private readonly IHubContext<ChartHub> _hub;
         private readonly TimeManager _timer;
-        private readonly IProizvodService _proizvodi;
         private readonly IKorisnikService _korisnik;
+        private readonly IProdavnicaService _prodavnica;
 
 
-        public ChartController(IHubContext<ChartHub> hub, TimeManager timer, IProizvodService proizvodi, IKorisnikService korisnik)
+        public ChartController(IHubContext<ChartHub> hub, TimeManager timer, IKorisnikService korisnik, IProdavnicaService prodavnica)
         {
             _hub = hub;
             _timer = timer;
             _korisnik = korisnik;
-            _proizvodi = proizvodi;
+            _prodavnica = prodavnica;
         }
         [HttpGet]
         public IActionResult Get()
         {
 
             var list = new List<ChartModel>{
-                new ChartModel { Data = new List<int> { _proizvodi.Get(new ProizvodiSearchObject()).Count() }, Label = "Proizvod", BackgroundColor = "#E74C3C" },
-                new ChartModel { Data = new List<int> { _korisnik.Get(null).Count() }, Label = "Korisnik", BackgroundColor = "#E5E7E9" },
+                new ChartModel { Data = new List<int> { _korisnik.Get(null).Count() }, Label = "Korisnik", BackgroundColor = "#E74C3C" },
+                new ChartModel { Data = new List<int> { _prodavnica.Get(new ProdavnicaSearchObject()).Count() }, Label = "Prodavnica", BackgroundColor = "#E5E7E9" },
             };
 
             _hub.Clients.All.SendAsync("TransferChartData", list);

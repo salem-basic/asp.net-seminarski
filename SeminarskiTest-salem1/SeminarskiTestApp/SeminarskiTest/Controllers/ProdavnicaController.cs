@@ -48,9 +48,17 @@ namespace SeminarskiTest.Controllers
 
         [HttpPost]
         
-        public void Add([FromBody] ProdavnicaVModel x)
+        public async void Add([FromBody] ProdavnicaVModel x)
         {
             this.repository.Add(x);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:7025/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage msg = await client.GetAsync("api/chart");
+            }
         }
 
         [HttpPatch("{id}")]
@@ -60,9 +68,17 @@ namespace SeminarskiTest.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async void Delete(int id)
         {
             this.repository.Delete(id);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:7025/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage msg = await client.GetAsync("api/chart");
+            }
         }
     }
 }
