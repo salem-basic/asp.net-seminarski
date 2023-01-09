@@ -8,7 +8,7 @@ namespace SeminarskiTest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrendController
+    public class BrendController : ControllerBase
     {
    
         private  IBrendService _service;

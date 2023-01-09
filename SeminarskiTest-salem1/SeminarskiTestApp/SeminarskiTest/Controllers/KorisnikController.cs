@@ -58,12 +58,7 @@ namespace SeminarskiTest.Controllers
                     return BadRequest(ModelState);
                 }
 
-                //if (!result.Succeeded)
-                //{
-                //    var errors = result.Errors.Select(e => e.Description);
-
-                //    return BadRequest(new RegistrationResponseVModel { Errors = errors });
-                //}
+ 
                 List<string> uloga = new List<string>();
                 uloga.Add("Korisnik");
                 await _userManager.AddToRolesAsync(user,uloga);
@@ -108,6 +103,41 @@ namespace SeminarskiTest.Controllers
             }
         }
 
+
+        [HttpPost]
+        [Route("dodajZaposlenika")]
+        public async Task<IActionResult> DodajZaposlenika(KorisnikVModel korisnik)
+        {
+            //_logger.LogInformation($"Registration attempt for {korisnik.Email}) ");
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+         
+                var user = _mapper.Map<Korisnik>(korisnik);
+                user.UserName = korisnik.Email;
+                user.NormalizedEmail = user.Email.ToUpper();
+                user.NormalizedUserName = user.UserName.ToUpper();
+
+                var result = await _userManager.CreateAsync(user, korisnik.Lozinka);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                    return BadRequest(ModelState);
+                }
+
+                List<string> uloga = new List<string>();
+                uloga.Add("Zaposlenik");
+                await _userManager.AddToRolesAsync(user, uloga);
+
+                return Accepted();
+            
+        }
 
         [HttpGet]
         public IEnumerable<Korisnik> Get(string? imeprezime)

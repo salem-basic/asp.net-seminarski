@@ -51,8 +51,11 @@ namespace SeminarskiTest.Services
         {
             var claims = new List<Claim>
              {
-                 new Claim(ClaimTypes.Name, _user.UserName)
+                 new Claim(ClaimTypes.Name, _user.UserName),
+                 new Claim(ClaimTypes.GivenName, _user.Ime)
              };
+
+
 
             var roles = await _userManager.GetRolesAsync(_user);
 

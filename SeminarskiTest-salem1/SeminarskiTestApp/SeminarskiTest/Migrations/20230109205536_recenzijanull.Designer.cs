@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeminarskiTest.Data;
 
@@ -11,9 +12,10 @@ using SeminarskiTest.Data;
 namespace SeminarskiTest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230109205536_recenzijanull")]
+    partial class recenzijanull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,22 +53,22 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3447fbaf-7e95-468e-8a40-70cb9a9f6a74",
-                            ConcurrencyStamp = "8f3ce2eb-7444-48c0-82f7-09bd86eb3e5f",
+                            Id = "74503884-4faa-45c1-b002-ab27311106f0",
+                            ConcurrencyStamp = "9ad07d8a-46a1-496b-b6fd-552123c9a980",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e8d22a04-7464-480d-93ad-690b06e22cf9",
-                            ConcurrencyStamp = "aef92fd9-390c-471e-9665-a0e3a52a0bc5",
+                            Id = "b19861ed-8c6a-446c-ade0-e45b93f5e302",
+                            ConcurrencyStamp = "c700b3ec-ad0c-4f64-8602-9e59ae18003c",
                             Name = "Zaposlenik",
                             NormalizedName = "ZAPOSLENIK"
                         },
                         new
                         {
-                            Id = "53e4d7eb-33d4-40ec-a2ed-b42ef4b18668",
-                            ConcurrencyStamp = "8edbf1b6-f59b-46ac-b802-e942023b3342",
+                            Id = "728e2f2f-741b-4f15-8de4-4b34414af6a0",
+                            ConcurrencyStamp = "4099f9f1-08bc-4232-a12a-077568d71fab",
                             Name = "Korisnik",
                             NormalizedName = "KORISNIK"
                         });
@@ -447,12 +449,12 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "17a4f2fd-41c9-48e4-bc75-4663b38525fe",
+                            Id = "73f2202b-99a5-4643-b85c-73051db4256a",
                             AccessFailedCount = 0,
                             Adresa = "Mahala",
                             BrojTelefona = "123",
-                            ConcurrencyStamp = "c4b593df-84ff-462a-9f9b-07687c5f7cf3",
-                            DatumRodjenja = new DateTime(2023, 1, 9, 22, 4, 59, 73, DateTimeKind.Local).AddTicks(7447),
+                            ConcurrencyStamp = "46b12c1c-d47b-4ee6-b156-bc6d1da0ccd3",
+                            DatumRodjenja = new DateTime(2023, 1, 9, 21, 55, 35, 473, DateTimeKind.Local).AddTicks(7725),
                             DrzavaId = 2,
                             Email = "salem@seminarski.com",
                             EmailConfirmed = false,
@@ -462,7 +464,7 @@ namespace SeminarskiTest.Migrations
                             Lozinka = "Lozinka1@",
                             PhoneNumberConfirmed = false,
                             Prezime = "Taslidza",
-                            SecurityStamp = "7b96e610-2daf-4b6a-a8ae-e9a75e6883ff",
+                            SecurityStamp = "ccb190a3-e803-4d5f-b7ec-b75defc31c8c",
                             SpolId = 2,
                             TwoFactorEnabled = false
                         });
@@ -589,37 +591,6 @@ namespace SeminarskiTest.Migrations
                     b.HasIndex("ValutaId");
 
                     b.ToTable("Proizvod");
-                });
-
-            modelBuilder.Entity("SeminarskiTest.Models.Recenzija", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<string>("korisnikId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ocjena")
-                        .HasColumnType("int");
-
-                    b.Property<string>("opis")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("proizvodId")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("korisnikId");
-
-                    b.HasIndex("proizvodId");
-
-                    b.ToTable("Recenzija");
                 });
 
             modelBuilder.Entity("SeminarskiTest.Models.Slika", b =>
@@ -834,25 +805,6 @@ namespace SeminarskiTest.Migrations
                     b.Navigation("Kategorija");
 
                     b.Navigation("Valuta");
-                });
-
-            modelBuilder.Entity("SeminarskiTest.Models.Recenzija", b =>
-                {
-                    b.HasOne("SeminarskiTest.Models.Korisnik", "korisnik")
-                        .WithMany()
-                        .HasForeignKey("korisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SeminarskiTest.Models.Proizvod", "proizvod")
-                        .WithMany()
-                        .HasForeignKey("proizvodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("korisnik");
-
-                    b.Navigation("proizvod");
                 });
 #pragma warning restore 612, 618
         }
