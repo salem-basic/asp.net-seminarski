@@ -13,7 +13,6 @@ namespace SeminarskiTest.Mapper
             CreateMap<KategorijaVModel, Kategorija>();
             CreateMap<KorisnikVModel, Korisnik>();
             CreateMap<LoginKorisnikVModel, Korisnik>();
-            CreateMap<NarudzbaVModel, Narudzba>();
             CreateMap<ProizvodVModel, Proizvod>();
             CreateMap<SpolVModel, Spol>();
             CreateMap<DobavljacVModel, Dobavljac>();
@@ -22,6 +21,11 @@ namespace SeminarskiTest.Mapper
             CreateMap<ProdavnicaVModel, Prodavnica>();
             CreateMap<DostavljacVModel, Dostavljac>();
             CreateMap<SlikaVModel, Slika>();
+            CreateMap<EvidencijaZaposlenikaVModel, EvidencijaZaposlenika>();
+            CreateMap<Recenzija, RecenzijaVModel>();
+            CreateMap<NarudzbaInsertRequest, Narudzba>();
+            CreateMap<Narudzba, NarudzbaVModel>();
+            CreateMap<NarudzbaStavka, NarudzbaStavkaInsertRequest>();
         }
     }
 }

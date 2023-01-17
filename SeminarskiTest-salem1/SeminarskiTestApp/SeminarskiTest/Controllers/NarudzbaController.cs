@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SeminarskiTest.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using SeminarskiTest.Data;
 using SeminarskiTest.Services.Interfaces;
 using SeminarskiTest.ViewModels;
 
@@ -9,35 +10,25 @@ namespace SeminarskiTest.Controllers
     [ApiController]
     public class NarudzbaController : ControllerBase
     {
-        private INaruzdbaService repository;
+        private readonly AppDbContext _db;
+        INarudzbaService _repository;
 
-        public NarudzbaController(INaruzdbaService _repository)
+        public NarudzbaController(AppDbContext db, INarudzbaService repository)
         {
-            repository = _repository;
+            _db = db;
+            _repository = repository;
         }
 
         [HttpGet]
-        public IEnumerable<Narudzba> Get()
+        public List<NarudzbaVModel> Get()
         {
-            return this.repository.Get(null);
+            return this._repository.GetNarudzba();
         }
 
         [HttpPost]
-        public void Add(NarudzbaVModel x)
+        public NarudzbaVModel Add([FromBody] NarudzbaInsertRequest x)
         {
-            this.repository.Add(x);
-        }
-
-        [HttpPatch("{id}")]
-        public void Update(int id, NarudzbaVModel x)
-        {
-            this.repository.Update(id, x);
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            this.repository.Delete(id);
+            return this._repository.Insert(x);
         }
     }
 }

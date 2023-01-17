@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeminarskiTest.Data;
 
@@ -11,9 +12,10 @@ using SeminarskiTest.Data;
 namespace SeminarskiTest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230112181443_noveKlase")]
+    partial class noveKlase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,22 +53,22 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c4aed8e2-d3e8-44a7-ae20-34b363e6146e",
-                            ConcurrencyStamp = "4cd8536c-1cf8-4ddd-b793-f98dc0113eb7",
+                            Id = "4957a825-0b61-4b2b-bf4d-dabfc5009bea",
+                            ConcurrencyStamp = "23186de1-b109-42a2-93ce-9c661cea61f9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e82cb2e5-c8c7-4716-b58c-949a94d14612",
-                            ConcurrencyStamp = "6411edbc-d9ca-44ef-b1a9-fdff7d7bff4c",
+                            Id = "d8491393-2f0c-450f-b365-007760917c8d",
+                            ConcurrencyStamp = "a41680d4-3672-4fee-a816-2a8d846993b0",
                             Name = "Zaposlenik",
                             NormalizedName = "ZAPOSLENIK"
                         },
                         new
                         {
-                            Id = "c95eaded-e5bb-4e99-b14f-a3e1ead2f80e",
-                            ConcurrencyStamp = "a785a5d2-25f2-4453-91a0-39bdabeffe13",
+                            Id = "0a4ea892-eb12-423a-8454-42c162942b50",
+                            ConcurrencyStamp = "0f835d67-df0e-43dd-a526-1162f72bb577",
                             Name = "Korisnik",
                             NormalizedName = "KORISNIK"
                         });
@@ -293,19 +295,12 @@ namespace SeminarskiTest.Migrations
                     b.Property<bool>("Aktivan")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("DatumOdjave")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DatumPrijave")
+                    b.Property<DateTime>("DatumAktivnosti")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("KorisnikId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("KorisnikIme")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -459,12 +454,12 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6be158be-7878-4c08-a244-40ebf79e8da7",
+                            Id = "3b4f6afd-41ec-4b55-88e7-41e22d4a6aa2",
                             AccessFailedCount = 0,
                             Adresa = "Mahala",
                             BrojTelefona = "123",
-                            ConcurrencyStamp = "c806c3c1-947d-4341-841d-e18dfed88fae",
-                            DatumRodjenja = new DateTime(2023, 1, 17, 10, 37, 38, 855, DateTimeKind.Local).AddTicks(9028),
+                            ConcurrencyStamp = "75e21ab9-e62e-4e12-93a0-13a480359627",
+                            DatumRodjenja = new DateTime(2023, 1, 12, 19, 14, 42, 553, DateTimeKind.Local).AddTicks(9810),
                             DrzavaId = 2,
                             Email = "salem@seminarski.com",
                             EmailConfirmed = false,
@@ -474,7 +469,7 @@ namespace SeminarskiTest.Migrations
                             Lozinka = "Lozinka1@",
                             PhoneNumberConfirmed = false,
                             Prezime = "Taslidza",
-                            SecurityStamp = "1013ea7c-d93b-4ee3-bfcf-bd786cf36200",
+                            SecurityStamp = "f45d31a0-d59a-4370-a843-acaed1f8f679",
                             SpolId = 2,
                             TwoFactorEnabled = false
                         });
@@ -654,21 +649,11 @@ namespace SeminarskiTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Opis")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SlikaSlika")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("prodavnicaId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("prodavnicaId");
 
                     b.ToTable("Slika");
                 });
@@ -897,17 +882,6 @@ namespace SeminarskiTest.Migrations
                     b.Navigation("korisnik");
 
                     b.Navigation("proizvod");
-                });
-
-            modelBuilder.Entity("SeminarskiTest.Models.Slika", b =>
-                {
-                    b.HasOne("SeminarskiTest.Models.Prodavnica", "Prodavnica")
-                        .WithMany()
-                        .HasForeignKey("prodavnicaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Prodavnica");
                 });
 
             modelBuilder.Entity("SeminarskiTest.Models.Narudzba", b =>

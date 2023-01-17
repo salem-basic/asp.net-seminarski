@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeminarskiTest.Data;
 
@@ -11,9 +12,10 @@ using SeminarskiTest.Data;
 namespace SeminarskiTest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230111221840_null")]
+    partial class @null
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,22 +53,22 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c4aed8e2-d3e8-44a7-ae20-34b363e6146e",
-                            ConcurrencyStamp = "4cd8536c-1cf8-4ddd-b793-f98dc0113eb7",
+                            Id = "a72a5346-a6ec-47fe-bcd5-8708000508f5",
+                            ConcurrencyStamp = "636fcfb7-0409-4760-81ba-86723c156577",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e82cb2e5-c8c7-4716-b58c-949a94d14612",
-                            ConcurrencyStamp = "6411edbc-d9ca-44ef-b1a9-fdff7d7bff4c",
+                            Id = "117934af-18a8-4f58-80a8-3edb42fd46e0",
+                            ConcurrencyStamp = "1e41e22a-b23f-471e-8985-08c4380f4f72",
                             Name = "Zaposlenik",
                             NormalizedName = "ZAPOSLENIK"
                         },
                         new
                         {
-                            Id = "c95eaded-e5bb-4e99-b14f-a3e1ead2f80e",
-                            ConcurrencyStamp = "a785a5d2-25f2-4453-91a0-39bdabeffe13",
+                            Id = "f075c0f0-ddc9-4e2a-8905-360a9a7ff853",
+                            ConcurrencyStamp = "9b034581-6efa-4152-bd94-8dd57e588489",
                             Name = "Korisnik",
                             NormalizedName = "KORISNIK"
                         });
@@ -293,23 +295,11 @@ namespace SeminarskiTest.Migrations
                     b.Property<bool>("Aktivan")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("DatumOdjave")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DatumPrijave")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("KorisnikId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("KorisnikIme")
+                    b.Property<string>("Smjena")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("KorisnikId");
 
                     b.ToTable("EvidencijaZaposlenika");
                 });
@@ -459,12 +449,12 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6be158be-7878-4c08-a244-40ebf79e8da7",
+                            Id = "ac20dcc8-e6fc-401b-b574-1cabb04c4df4",
                             AccessFailedCount = 0,
                             Adresa = "Mahala",
                             BrojTelefona = "123",
-                            ConcurrencyStamp = "c806c3c1-947d-4341-841d-e18dfed88fae",
-                            DatumRodjenja = new DateTime(2023, 1, 17, 10, 37, 38, 855, DateTimeKind.Local).AddTicks(9028),
+                            ConcurrencyStamp = "5da189b2-3a44-4397-8d06-4a0836645989",
+                            DatumRodjenja = new DateTime(2023, 1, 11, 23, 18, 39, 631, DateTimeKind.Local).AddTicks(134),
                             DrzavaId = 2,
                             Email = "salem@seminarski.com",
                             EmailConfirmed = false,
@@ -474,7 +464,7 @@ namespace SeminarskiTest.Migrations
                             Lozinka = "Lozinka1@",
                             PhoneNumberConfirmed = false,
                             Prezime = "Taslidza",
-                            SecurityStamp = "1013ea7c-d93b-4ee3-bfcf-bd786cf36200",
+                            SecurityStamp = "f623bb80-1b3f-4bc8-9162-9b63482e5c74",
                             SpolId = 2,
                             TwoFactorEnabled = false
                         });
@@ -654,21 +644,11 @@ namespace SeminarskiTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Opis")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SlikaSlika")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("prodavnicaId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("prodavnicaId");
 
                     b.ToTable("Slika");
                 });
@@ -787,17 +767,6 @@ namespace SeminarskiTest.Migrations
                     b.Navigation("Drzava");
                 });
 
-            modelBuilder.Entity("SeminarskiTest.Models.EvidencijaZaposlenika", b =>
-                {
-                    b.HasOne("SeminarskiTest.Models.Korisnik", "Korisnik")
-                        .WithMany()
-                        .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Korisnik");
-                });
-
             modelBuilder.Entity("SeminarskiTest.Models.Korisnik", b =>
                 {
                     b.HasOne("SeminarskiTest.Models.Drzava", "Drzava")
@@ -897,17 +866,6 @@ namespace SeminarskiTest.Migrations
                     b.Navigation("korisnik");
 
                     b.Navigation("proizvod");
-                });
-
-            modelBuilder.Entity("SeminarskiTest.Models.Slika", b =>
-                {
-                    b.HasOne("SeminarskiTest.Models.Prodavnica", "Prodavnica")
-                        .WithMany()
-                        .HasForeignKey("prodavnicaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Prodavnica");
                 });
 
             modelBuilder.Entity("SeminarskiTest.Models.Narudzba", b =>

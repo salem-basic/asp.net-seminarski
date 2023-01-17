@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SeminarskiTest.Data;
-using SeminarskiTest.Migrations;
 using SeminarskiTest.Models;
+using SeminarskiTest.SearchObject;
+using SeminarskiTest.Services.Interfaces;
+using SeminarskiTest.ViewModels;
 
 namespace SeminarskiTest.Controllers
 {
@@ -12,19 +14,23 @@ namespace SeminarskiTest.Controllers
     public class RecenzijaController : ControllerBase
     {
         private readonly AppDbContext _dbContext;
+        private IRecenzijaService _repository;
 
-        public RecenzijaController(AppDbContext dbContext)
+
+        public RecenzijaController(AppDbContext dbContext, IRecenzijaService repository)
         {
             _dbContext = dbContext;
+            _repository = repository;
         }
 
-        public class RecenzijaVM
+        [HttpGet]
+        public IEnumerable<Recenzija> GetAll()
         {
-            public int id { get; set; }
-            public string nazivProizvoda { get; set; }
-            public List<Recenzija> recenzije { get; set; }
-            public List<Korisnik> korisnici { get; set; }
+            var recenzija = _dbContext.Recenzija.ToList();
+
+            return recenzija;
         }
+
 
         [HttpGet("{id}")]
         public ActionResult<RecenzijaVM> GetRecenzije(int id)
@@ -81,13 +87,6 @@ namespace SeminarskiTest.Controllers
             return Ok(korisnik);
         }
 
-        public class DodajRecenzijuVM
-        {
-            public string opis { get; set; }
-            public int ocjena { get; set; }
-            public string? korisnik { get; set; }
-
-        }
 
         [HttpPost("{id}")]
         public ActionResult Recenziraj(int id, DodajRecenzijuVM x)
@@ -103,7 +102,8 @@ namespace SeminarskiTest.Controllers
             nova.opis = x.opis;
             nova.ocjena = x.ocjena;
             nova.proizvodId = proizvod.Id;
-            nova.korisnikId = x.korisnik;
+            nova.korisnikId = x.korisnikid;
+            nova.korisnikIme = x.korisnikime;
 
             _dbContext.SaveChanges();
 

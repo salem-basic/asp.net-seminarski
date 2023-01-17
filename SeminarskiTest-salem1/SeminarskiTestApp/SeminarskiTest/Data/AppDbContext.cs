@@ -14,7 +14,6 @@ namespace SeminarskiTest.Data
         public DbSet<Kartica> Kartica { get; set; }
         public DbSet<Kategorija> Kategorija { get; set; }
         public DbSet<Korisnik> Korisnik { get; set; }
-        public DbSet<Narudzba> Narudzba { get; set; }
         public DbSet<Proizvod> Proizvod { get; set; }
         public DbSet<Slika> Slika { get; set; }
         public DbSet<Brend> Brend { get; set; }
@@ -24,6 +23,8 @@ namespace SeminarskiTest.Data
         public DbSet<Prodavnica> Prodavnica { get; set; }
         public DbSet<Dostavljac> Dostavljac { get; set; }
         public DbSet<Recenzija> Recenzija { get; set; }
+        public DbSet<Narudzba> Narudzba { get; set; }
+        public DbSet<NarudzbaStavka> NarudzbaStavka { get; set; }
 
 
 
@@ -54,6 +55,8 @@ namespace SeminarskiTest.Data
                   Id = 2,
                   NazivSpola = "Zenski"
               });
+
+          
 
             builder.Entity<Korisnik>().HasData(
                 new Korisnik

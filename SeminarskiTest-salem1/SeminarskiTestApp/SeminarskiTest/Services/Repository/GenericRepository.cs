@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using SeminarskiTest.Data;
 using SeminarskiTest.Helper;
+using System.Linq;
 
 namespace SeminarskiTest.Services.Repository
 {
@@ -23,7 +25,7 @@ namespace SeminarskiTest.Services.Repository
 
             entity = AddQuery(entity, search);
 
-            return entity.ToList();
+            return entity as IEnumerable<T>;
 
         }
 
@@ -39,7 +41,7 @@ namespace SeminarskiTest.Services.Repository
             return GetPaged(entity, search);
         }
 
-        public void Add(TModel x)
+        public  void Add(TModel x)
         {
             var set = _context.Set<T>();
 
@@ -48,6 +50,8 @@ namespace SeminarskiTest.Services.Repository
             set.Add(entity);
             _context.SaveChanges();
         }
+
+        
 
         public void Update(int id, TModel z)
         {
@@ -82,6 +86,11 @@ namespace SeminarskiTest.Services.Repository
             _context.SaveChanges();
         }
 
+
+        public virtual void BeforeInsert(TModel insert, T entity)
+        {
+
+        }
 
         virtual public IQueryable<T> AddInclude(IQueryable<T> query)
         {

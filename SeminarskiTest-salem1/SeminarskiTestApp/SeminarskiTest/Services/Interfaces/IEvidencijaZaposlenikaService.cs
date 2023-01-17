@@ -5,7 +5,8 @@ using SeminarskiTest.ViewModels;
 
 namespace SeminarskiTest.Services.Interfaces
 {
-    public interface ISlikaService : IGenericRepository<Slika, SlikaVModel, BaseSearchObject>
+    public interface IEvidencijaZaposlenikaService : IGenericRepository<EvidencijaZaposlenika, EvidencijaZaposlenikaVModel, BaseSearchObject>
     {
+
     }
 }

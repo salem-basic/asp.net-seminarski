@@ -15,6 +15,7 @@ namespace SeminarskiTest.Models
         public Proizvod proizvod { get; set; }
 
         public string korisnikId { get; set; }
+        public string korisnikIme { get; set; }
         public virtual Korisnik korisnik { get; set; }
     }
 }
