@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SeminarskiTest.Migrations
 {
-    public partial class nova : Migration
+    public partial class zavrsna : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,19 +24,6 @@ namespace SeminarskiTest.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Brend",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NazivBrenda = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Brend", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Drzava",
                 columns: table => new
                 {
@@ -49,20 +36,6 @@ namespace SeminarskiTest.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Drzava", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EvidencijaZaposlenika",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Aktivan = table.Column<bool>(type: "bit", nullable: false),
-                    Smjena = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EvidencijaZaposlenika", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,7 +58,9 @@ namespace SeminarskiTest.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NazivKategorije = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NazivKategorije = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Materijal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Kvalitet = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,19 +81,6 @@ namespace SeminarskiTest.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Prodavnica", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Slika",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SlikaSlika = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Slika", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +131,28 @@ namespace SeminarskiTest.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Brend",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NazivBrenda = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DrzavaId = table.Column<int>(type: "int", nullable: false),
+                    Luxury = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Slika = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brend", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Brend_Drzava_DrzavaId",
+                        column: x => x.DrzavaId,
+                        principalTable: "Drzava",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Dobavljac",
                 columns: table => new
                 {
@@ -206,6 +190,27 @@ namespace SeminarskiTest.Migrations
                         name: "FK_Dostavljac_Drzava_DrzavaId",
                         column: x => x.DrzavaId,
                         principalTable: "Drzava",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Slika",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SlikaSlika = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    prodavnicaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Slika", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Slika_Prodavnica_prodavnicaId",
+                        column: x => x.prodavnicaId,
+                        principalTable: "Prodavnica",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -285,7 +290,7 @@ namespace SeminarskiTest.Migrations
                         column: x => x.DobavljacId,
                         principalTable: "Dobavljac",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Proizvod_Kategorija_KategorijaId",
                         column: x => x.KategorijaId,
@@ -386,6 +391,29 @@ namespace SeminarskiTest.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EvidencijaZaposlenika",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Aktivan = table.Column<bool>(type: "bit", nullable: false),
+                    DatumPrijave = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DatumOdjave = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KorisnikId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    KorisnikIme = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EvidencijaZaposlenika", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EvidencijaZaposlenika_AspNetUsers_KorisnikId",
+                        column: x => x.KorisnikId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Narudzba",
                 columns: table => new
                 {
@@ -467,9 +495,9 @@ namespace SeminarskiTest.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "447f5f39-2524-426c-afbf-ce109ad96270", "dba05305-a4b0-4601-b2b2-cf6b7dc35a4a", "Zaposlenik", "ZAPOSLENIK" },
-                    { "8266d0aa-01d2-4c33-b035-3d31a0b79537", "f0ed276f-d113-49b6-b06f-7c723b7c90ce", "Korisnik", "KORISNIK" },
-                    { "90fb0350-841f-48aa-a066-c912ce6c74b7", "7077ad31-93da-42f9-b1b3-162830f26817", "Admin", "ADMIN" }
+                    { "0161b16d-520b-430c-90a9-dd084efac7a3", "c77f6d69-8863-49fb-b17d-2eabe0af5562", "Korisnik", "KORISNIK" },
+                    { "3f35b8db-27df-4d54-b54a-859982b25551", "3255fa0e-aaee-4a06-ad06-598fdf821fbf", "Admin", "ADMIN" },
+                    { "dfe645ff-a0d1-4e7e-b759-8181a2847a27", "82e73b8b-d6aa-4acd-969f-5574abf687ac", "Zaposlenik", "ZAPOSLENIK" }
                 });
 
             migrationBuilder.InsertData(
@@ -485,7 +513,7 @@ namespace SeminarskiTest.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Adresa", "BrojTelefona", "ConcurrencyStamp", "DatumRodjenja", "DrzavaId", "Email", "EmailConfirmed", "Grad", "Ime", "LockoutEnabled", "LockoutEnd", "Lozinka", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Prezime", "SecurityStamp", "SpolId", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "eda09728-e88f-47d1-b992-ed3dc1123c31", 0, "Mahala", "123", "a06d4f34-9c29-4b5a-a095-bb164457b561", new DateTime(2023, 1, 11, 22, 52, 54, 872, DateTimeKind.Local).AddTicks(3735), 2, "salem@seminarski.com", false, "Mostar", "Hamza", false, null, "Lozinka1@", null, null, null, null, false, "Taslidza", "5799df07-434e-4e3a-8663-6978ba108380", 2, false, null });
+                values: new object[] { "70688eef-d6fc-4167-bf6c-eebbf5f30ea9", 0, "Mahala", "123", "4e7ad0e7-5e3b-4412-8293-2c1e9ae98690", new DateTime(2023, 1, 18, 18, 2, 22, 375, DateTimeKind.Local).AddTicks(5296), 2, "salem@seminarski.com", false, "Mostar", "Hamza", false, null, "Lozinka1@", null, null, null, null, false, "Taslidza", "278a23d5-fbea-418f-869f-6ecd5098204c", 2, false, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -537,6 +565,11 @@ namespace SeminarskiTest.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Brend_DrzavaId",
+                table: "Brend",
+                column: "DrzavaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Dobavljac_DrzavaId",
                 table: "Dobavljac",
                 column: "DrzavaId");
@@ -545,6 +578,11 @@ namespace SeminarskiTest.Migrations
                 name: "IX_Dostavljac_DrzavaId",
                 table: "Dostavljac",
                 column: "DrzavaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EvidencijaZaposlenika_KorisnikId",
+                table: "EvidencijaZaposlenika",
+                column: "KorisnikId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Narudzba_KorisnikID",
@@ -590,6 +628,11 @@ namespace SeminarskiTest.Migrations
                 name: "IX_Recenzija_proizvodId",
                 table: "Recenzija",
                 column: "proizvodId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Slika_prodavnicaId",
+                table: "Slika",
+                column: "prodavnicaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -622,9 +665,6 @@ namespace SeminarskiTest.Migrations
                 name: "NarudzbaStavka");
 
             migrationBuilder.DropTable(
-                name: "Prodavnica");
-
-            migrationBuilder.DropTable(
                 name: "Recenzija");
 
             migrationBuilder.DropTable(
@@ -638,6 +678,9 @@ namespace SeminarskiTest.Migrations
 
             migrationBuilder.DropTable(
                 name: "Proizvod");
+
+            migrationBuilder.DropTable(
+                name: "Prodavnica");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -1,10 +1,11 @@
 ﻿using SeminarskiTest.Models;
+using SeminarskiTest.SearchObject;
 using SeminarskiTest.Services.Repository;
 using SeminarskiTest.ViewModels;
 
 namespace SeminarskiTest.Services.Interfaces
 {
-    public interface IDobavljacService : IGenericRepository<Dobavljac, DobavljacVModel, object>
+    public interface IDobavljacService : IGenericRepository<Dobavljac, DobavljacVModel, BaseSearchObject>
     {
     }
 }

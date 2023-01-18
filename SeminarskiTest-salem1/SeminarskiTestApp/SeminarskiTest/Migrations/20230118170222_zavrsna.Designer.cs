@@ -12,8 +12,8 @@ using SeminarskiTest.Data;
 namespace SeminarskiTest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230111215255_nova")]
-    partial class nova
+    [Migration("20230118170222_zavrsna")]
+    partial class zavrsna
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,22 +53,22 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "90fb0350-841f-48aa-a066-c912ce6c74b7",
-                            ConcurrencyStamp = "7077ad31-93da-42f9-b1b3-162830f26817",
+                            Id = "3f35b8db-27df-4d54-b54a-859982b25551",
+                            ConcurrencyStamp = "3255fa0e-aaee-4a06-ad06-598fdf821fbf",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "447f5f39-2524-426c-afbf-ce109ad96270",
-                            ConcurrencyStamp = "dba05305-a4b0-4601-b2b2-cf6b7dc35a4a",
+                            Id = "dfe645ff-a0d1-4e7e-b759-8181a2847a27",
+                            ConcurrencyStamp = "82e73b8b-d6aa-4acd-969f-5574abf687ac",
                             Name = "Zaposlenik",
                             NormalizedName = "ZAPOSLENIK"
                         },
                         new
                         {
-                            Id = "8266d0aa-01d2-4c33-b035-3d31a0b79537",
-                            ConcurrencyStamp = "f0ed276f-d113-49b6-b06f-7c723b7c90ce",
+                            Id = "0161b16d-520b-430c-90a9-dd084efac7a3",
+                            ConcurrencyStamp = "c77f6d69-8863-49fb-b17d-2eabe0af5562",
                             Name = "Korisnik",
                             NormalizedName = "KORISNIK"
                         });
@@ -188,11 +188,25 @@ namespace SeminarskiTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("DrzavaId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Luxury")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NazivBrenda")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Slika")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DrzavaId");
 
                     b.ToTable("Brend");
                 });
@@ -295,11 +309,23 @@ namespace SeminarskiTest.Migrations
                     b.Property<bool>("Aktivan")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Smjena")
+                    b.Property<DateTime?>("DatumOdjave")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatumPrijave")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("KorisnikId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("KorisnikIme")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("KorisnikId");
 
                     b.ToTable("EvidencijaZaposlenika");
                 });
@@ -332,6 +358,14 @@ namespace SeminarskiTest.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Kvalitet")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Materijal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NazivKategorije")
                         .IsRequired()
@@ -449,12 +483,12 @@ namespace SeminarskiTest.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eda09728-e88f-47d1-b992-ed3dc1123c31",
+                            Id = "70688eef-d6fc-4167-bf6c-eebbf5f30ea9",
                             AccessFailedCount = 0,
                             Adresa = "Mahala",
                             BrojTelefona = "123",
-                            ConcurrencyStamp = "a06d4f34-9c29-4b5a-a095-bb164457b561",
-                            DatumRodjenja = new DateTime(2023, 1, 11, 22, 52, 54, 872, DateTimeKind.Local).AddTicks(3735),
+                            ConcurrencyStamp = "4e7ad0e7-5e3b-4412-8293-2c1e9ae98690",
+                            DatumRodjenja = new DateTime(2023, 1, 18, 18, 2, 22, 375, DateTimeKind.Local).AddTicks(5296),
                             DrzavaId = 2,
                             Email = "salem@seminarski.com",
                             EmailConfirmed = false,
@@ -464,7 +498,7 @@ namespace SeminarskiTest.Migrations
                             Lozinka = "Lozinka1@",
                             PhoneNumberConfirmed = false,
                             Prezime = "Taslidza",
-                            SecurityStamp = "5799df07-434e-4e3a-8663-6978ba108380",
+                            SecurityStamp = "278a23d5-fbea-418f-869f-6ecd5098204c",
                             SpolId = 2,
                             TwoFactorEnabled = false
                         });
@@ -644,11 +678,21 @@ namespace SeminarskiTest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SlikaSlika")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("prodavnicaId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("prodavnicaId");
 
                     b.ToTable("Slika");
                 });
@@ -745,6 +789,17 @@ namespace SeminarskiTest.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SeminarskiTest.Models.Brend", b =>
+                {
+                    b.HasOne("SeminarskiTest.Models.Drzava", "Drzava")
+                        .WithMany()
+                        .HasForeignKey("DrzavaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Drzava");
+                });
+
             modelBuilder.Entity("SeminarskiTest.Models.Dobavljac", b =>
                 {
                     b.HasOne("SeminarskiTest.Models.Drzava", "Drzava")
@@ -765,6 +820,17 @@ namespace SeminarskiTest.Migrations
                         .IsRequired();
 
                     b.Navigation("Drzava");
+                });
+
+            modelBuilder.Entity("SeminarskiTest.Models.EvidencijaZaposlenika", b =>
+                {
+                    b.HasOne("SeminarskiTest.Models.Korisnik", "Korisnik")
+                        .WithMany()
+                        .HasForeignKey("KorisnikId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Korisnik");
                 });
 
             modelBuilder.Entity("SeminarskiTest.Models.Korisnik", b =>
@@ -799,7 +865,7 @@ namespace SeminarskiTest.Migrations
 
             modelBuilder.Entity("SeminarskiTest.Models.NarudzbaStavka", b =>
                 {
-                    b.HasOne("SeminarskiTest.Models.Narudzba", "Narudzba")
+                    b.HasOne("SeminarskiTest.Models.Narudzba", null)
                         .WithMany("NarudzbaStavka")
                         .HasForeignKey("NarudzbaID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -810,8 +876,6 @@ namespace SeminarskiTest.Migrations
                         .HasForeignKey("ProizvodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Narudzba");
 
                     b.Navigation("Proizvod");
                 });
@@ -868,6 +932,17 @@ namespace SeminarskiTest.Migrations
                     b.Navigation("korisnik");
 
                     b.Navigation("proizvod");
+                });
+
+            modelBuilder.Entity("SeminarskiTest.Models.Slika", b =>
+                {
+                    b.HasOne("SeminarskiTest.Models.Prodavnica", "Prodavnica")
+                        .WithMany()
+                        .HasForeignKey("prodavnicaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prodavnica");
                 });
 
             modelBuilder.Entity("SeminarskiTest.Models.Narudzba", b =>
